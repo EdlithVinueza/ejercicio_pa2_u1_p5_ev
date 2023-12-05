@@ -57,6 +57,8 @@ public class MatriculaServiceImpl implements IMatriculaService {
 		// Calculamos el nuevo Valor
 		Propietario propietario = this.iPropietarioRepository.selecionar(cedula);
 		Vehiculo vehiculo = this.iVehiculoRepository.selecionar(placa);
+		
+		if (propietario!=null && vehiculo !=null) {
 		BigDecimal nuevoValor = null;
 		if (vehiculo.getTipo().equals("pesado")) {
 			nuevoValor = vehiculo.getPrecio().multiply(new BigDecimal(0.25));
@@ -80,6 +82,10 @@ public class MatriculaServiceImpl implements IMatriculaService {
 		this.guardar(tmp);
 
 		System.out.println("Se genero la matricula: " + tmp);
+		}
+		else {
+			System.out.println("DATOS INVALIDOS, NO EXISTE UN REGISTRO");
+		}
 
 	}
 
